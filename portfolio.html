@@ -1,0 +1,114 @@
+<!DOCTYPE>
+<html lang = "en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stephen McGuire | Portfolio</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<header>
+		<nav class="menu">
+			<a href= "index.html">Home</a>	|
+			<a href= "portfolio.html">Portfolio</a>	|
+			<a href= "contact.html">Contact</a>
+		</nav>
+	</header>
+	
+	<h1>My Portfolio</h1>
+	
+	
+	<ul>
+		<li>Personal Website
+			<ul>
+				<li>First website from Coder Camp - Coding from Scratch</li>
+			</ul>
+		</li>
+	</ul>
+	
+	<div id="floating-div">
+		<textarea id="text-area" type="text" name="textarea" rows="20" cols="50" placeholder="Type here..."></textarea>
+	</div>
+	<button id="stat-button">Get Stats</button>
+	<!--
+	<table id="stats-table">
+	//	<tbody>
+			<tr>
+				<td><label>Number of Words: </label> <label id="num-words"></label></td>
+			</tr>
+			<tr>
+				<td><label>Number of Sentences: </label> <label id="num-sentences"></label></td>
+			</tr>
+			<tr>
+				<td><label>Ave Words Per Sentence: </label> <label id="ave-words-sentence"></label></td>
+			</tr>
+			<tr>
+				<td><label>Number of spaces: </label> <label id="num-spaces"></label></td>
+			</tr>
+		</tbody>
+	</table>
+	-->
+	<br>
+	<label>Number of Words: </label> <label id="num-words"></label>
+	<br>
+	<label>Number of Sentences: </label> <label id="num-sentences"></label>
+	<br>
+	<label>Ave Words Per Sentence: </label> <label id="ave-words-sentence"></label>
+	<br>
+	<label>Number of spaces: </label> <label id="num-spaces"></label>
+	<footer class="footer-class">
+		<a href="https://www.facebook.com/stephen.g.mcguire">Facebook</a>
+	</footer>
+	<script>
+		var myBtn = document.getElementById( "stat-button" );
+		var onButtonClick = function(){
+			var text = document.getElementById( "text-area" ).value;
+			console.log( "The text is: " + text );
+			getStats( text );
+		}
+		myBtn.addEventListener( "click", onButtonClick );
+		function getStats( text ){
+			console.log( "getStats: " + text );
+			countWords( text );
+		}
+		
+		function countWords( text ){
+			var numWords = 0;
+			var currentSentenceWordCount = 0;
+			var numSentences = 0;
+			var aveWordsInSentence = 0;
+			var numSpaces = 0;
+			for ( i = 0; i< text.length; i++ ){
+				if ( text[ i ] === "." ){
+					numSentences++
+					aveWordsInSentence = numWords / numSentences;
+				}
+				else if ( text[ i ] !== " " ){
+					continue;
+				}
+				else {
+					numSpaces++
+					currentSentenceWordCount++;	
+					numWords = numWords + currentSentenceWordCount;
+					currentSentenceWordCount = 0;
+					
+				}
+			}
+			//take care of the last word in the last sentence
+			++numWords;
+			aveWordsInSentence = numWords / numSentences;
+			
+			document.getElementById( "num-words" ).textContent = numWords;
+			document.getElementById( "num-sentences" ).textContent = numSentences;
+			document.getElementById( "ave-words-sentence" ).textContent = aveWordsInSentence;
+			document.getElementById( "num-spaces" ).textContent = numSpaces;
+			console.log( "num words: " + numWords );
+			console.log( "num Sentences: " + numSentences );
+			console.log( "ave words: " + aveWordsInSentence );
+			console.log( "num spaces: " + numSpaces );
+			
+		}
+
+
+	</script>	
+</body>
+</html>
